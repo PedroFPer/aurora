@@ -3,16 +3,16 @@ import jakarta.persistence.*
 import java.math.BigDecimal
 
 @Entity
-@Table(name = "itens_carrinho")
-open class ItemCarrinhoModel {
+@Table(name = "itens_simulacao")
+open class ItemSimulacaoModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
      var id: Long? = null
 
     @ManyToOne
-    @JoinColumn(name = "carrinho_id")
-     var carrinho: CarrinhoModel? = null
+    @JoinColumn(name = "simulacao_id")
+     var simulacao: SimulacaoCompraModel? = null
 
     @ManyToOne
     @JoinColumn(name = "produto_id")
@@ -21,7 +21,10 @@ open class ItemCarrinhoModel {
      var quantidade: Int = 0
      var precoUnitario: BigDecimal = BigDecimal.ZERO
 
-    constructor()
+    constructor(){
 
-    // getters e setters...
+    }
+
+
+
 }
