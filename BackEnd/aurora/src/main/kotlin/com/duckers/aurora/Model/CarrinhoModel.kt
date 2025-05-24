@@ -23,5 +23,5 @@ open class CarrinhoModel {
 
     constructor()
 
-    
+
 }
