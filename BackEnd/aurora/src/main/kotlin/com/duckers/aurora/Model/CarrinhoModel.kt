@@ -1,17 +1,27 @@
 package com.duckers.aurora.Model
+import jakarta.persistence.*
+import java.math.BigDecimal
 
-class CarrinhoModel {
-    private var carrinhoId: Int? = null
-    private var clienteId: Int? = null
-    private var dataCriacao: String = ""
-    private var status: String = ""
-    private var valorTotal: Double = 0.0
+@Entity
+@Table(name = "carrinhos")
+open class CarrinhoModel {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "carrinho_id")
+     var id: Long? = null
+
+    @OneToOne
+    @JoinColumn(name = "cliente_id", unique = true)
+     var cliente: ClienteModel? = null
+
+    @Column(name = "valor_total")
+     var valorTotal: BigDecimal = BigDecimal.ZERO
+
+    @OneToMany(mappedBy = "carrinho", cascade = [CascadeType.PERSIST, CascadeType.MERGE], orphanRemoval = true)
+     var itens: List<ItemCarrinhoModel> = mutableListOf()
+
+    constructor()
 
 
-    constructor(clienteId: Int, dataCriacao: String, status: String, valorTotal: Double) {
-        this.clienteId = clienteId
-        this.dataCriacao = dataCriacao
-        this.status = status
-        this.valorTotal = valorTotal
-    }
 }

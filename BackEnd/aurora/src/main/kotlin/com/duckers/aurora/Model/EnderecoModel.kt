@@ -1,33 +1,36 @@
 package com.duckers.aurora.Model
+import jakarta.persistence.*
+@Entity
+@Table(name = "enderecos")
+open class EnderecoModel {
 
-class EnderecoModel {
-    private var enderecoId: Int? = null
-    private var clienteId: Int? = null
-    private var rua: String = ""
-    private var numero: String = ""
-    private var complemento: String = ""
-    private var bairro: String = ""
-    private var cidade: String = ""
-    private var estado: String = ""
-    private var cep: String = ""
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "endereco_id")
+     var id: Int? = null
 
-    constructor(
-        clienteId: Int,
-        rua: String,
-        numero: String,
-        complemento: String,
-        bairro: String,
-        cidade: String,
-        estado: String,
-        cep: String
-    ) {
-        this.clienteId = clienteId
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
+     var cliente: ClienteModel? = null
+
+     var rua: String = ""
+     var numero: String = ""
+     var complemento: String? = null
+     var bairro: String = ""
+     var cidade: String = ""
+     var estado: String = ""
+     var cep: String = ""
+
+    constructor()
+
+    constructor(rua: String, numero: String, bairro: String, cidade: String, estado: String, cep: String) {
         this.rua = rua
         this.numero = numero
-        this.complemento = complemento
         this.bairro = bairro
         this.cidade = cidade
         this.estado = estado
         this.cep = cep
     }
+
+    // getters e setters...
 }
